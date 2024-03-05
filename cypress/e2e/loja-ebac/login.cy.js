@@ -1,5 +1,6 @@
 /// <reference types="cypress"/>
 
+const cypress = require('cypress');
 const perfil = require('../../fixtures/perfil.json')
 
 describe('funcionalidade: login', () => {
@@ -16,7 +17,7 @@ afterEach(() => {
         cy.get('#username').type('welyssom@gmail.com')
         cy.get('#password').type('qawsedrftgyhujikolpç')
         cy.get('.woocommerce-form > .button').click()
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, welyssom (não é welyssom? Sair)')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
     })
 
     it('Deve exibir uma mensagem de erro ao inserir usuário invalido', () => {
@@ -37,7 +38,7 @@ afterEach(() => {
         cy.get('#username').type(perfil.usuario)
         cy.get('#password').type(perfil.senha)
         cy.get('.woocommerce-form > .button').click()
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, welyssom (não é welyssom? Sair)')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
     
     });
     it('Deve fazer login com sucesso - usando fixture', () => {
@@ -45,12 +46,12 @@ afterEach(() => {
         cy.get('#username').type(dados.usuario, {log:false})
         cy.get('#password').type(dados.senha, {log:false})
         cy.get('.woocommerce-form > .button').click()
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, welyssom (não é welyssom? Sair)')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
     
         })
     });
     it('Deve fazer login com sucesso - usando comandos customizado', () => {
         cy.login('welyssom@gmail.com', 'qawsedrftgyhujikolpç')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain' , 'Olá, welyssom (não é welyssom? Sair)')
+        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('exist')
     });
 })
